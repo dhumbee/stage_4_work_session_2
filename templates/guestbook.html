@@ -1,0 +1,43 @@
+{% extends "webpage_html.html" %}
+{% block content %}
+
+<div class="main_form">
+	<h2>Welcome to my Guestbook!</h2>
+	<form action="/" method="post">
+	Please insert your name and message to leave a comment on my wall.
+	<br>
+<!--Begins the text boxes for users to put their name and message-->
+	<label for="name_text_box">Name:</label><input id="name_text_box" type="text" name="guest_name"><br>
+	<label for="message_box">Message:</label><input id="message_box" type="text" name="guest_message"><br>
+	{% if guest_name %}
+		{% for guest_name in guest_name %}
+			<input type="hidden" name="guest_name" value="{{guest_name}}">
+		{% endfor %}
+			{% if guest_message %}
+				{% for guest_message in guest_message %}
+					<input type="hidden" name="guest_message" value="{{guest_message}}">
+				{% endfor %}
+			{% endif %}
+	{% endif %}
+	<button>Submit</button>
+<!--End text submission and begin wall of posts-->
+	{% if guest_name %}
+	<br>
+	<br>
+	<h1>Guests Posts</h1>
+		{% for guest_name in guest_name %}
+			<h2>{{guest_name}}</h2>
+		{% endfor %}
+			{% if guest_message %}
+				{% for guest_message in guest_message %}
+					<p>{{guest_message}}</p>
+				{% endfor %}
+			{% endif %}	
+	{% endif %}
+	</form>
+</div>
+
+
+
+
+{% endblock %}
